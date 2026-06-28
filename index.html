@@ -24,13 +24,9 @@ header{
 
 /* HERO */
 .hero{
-    padding:40px;
+    padding:30px;
     text-align:center;
     background:white;
-}
-
-.hero h1{
-    color:#333;
 }
 
 /* SERVICES */
@@ -46,37 +42,32 @@ header{
     margin:10px;
     padding:20px;
     width:250px;
-    box-shadow:0 0 10px rgba(0,0,0,0.1);
-    text-align:center;
     border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
 }
 
 /* FORM */
 .form-section{
-    background:#fff;
-    padding:30px;
+    background:white;
+    padding:20px;
     text-align:center;
 }
 
 input, textarea{
     width:90%;
     padding:10px;
-    margin:10px 0;
+    margin:8px;
     border:1px solid #ccc;
-    border-radius:5px;
 }
 
+/* BUTTON */
 button{
-    padding:10px 20px;
+    padding:10px 15px;
     background:#007bff;
     color:white;
     border:none;
     cursor:pointer;
     border-radius:5px;
-}
-
-button:hover{
-    background:#0056b3;
 }
 
 /* WHATSAPP BUTTON */
@@ -86,29 +77,47 @@ button:hover{
     right:20px;
     background:#25D366;
     color:white;
-    padding:12px 15px;
+    padding:12px;
     border-radius:50px;
     text-decoration:none;
     font-weight:bold;
 }
 
-/* FOOTER */
-footer{
+/* ADMIN PANEL */
+.admin-bar{
     background:#222;
     color:white;
-    text-align:center;
     padding:10px;
-    margin-top:20px;
+    text-align:center;
+}
+
+.job-list{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    padding:20px;
+}
+
+.job{
+    background:white;
+    margin:10px;
+    padding:15px;
+    width:250px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
 }
 </style>
 </head>
 
 <body>
 
-<!-- STEP 2 + STEP 3: WhatsApp Number (ONE TIME SET) -->
-<script>
-const WHATSAPP_NUMBER = "919204926920";
-</script>
+<!-- ADMIN BAR -->
+<div class="admin-bar">
+    Admin Password:
+    <input type="password" id="pass">
+    <button onclick="loginAdmin()">Login</button>
+    <button onclick="logoutAdmin()">Logout</button>
+</div>
 
 <header>
     <h2>Jharkhand Job Solution</h2>
@@ -116,9 +125,10 @@ const WHATSAPP_NUMBER = "919204926920";
 
 <section class="hero">
     <h1>Find Your Dream Job Easily</h1>
-    <p>We help you get local jobs fast</p>
+    <p>Local jobs, fast apply system</p>
 </section>
 
+<!-- SERVICES -->
 <section class="services">
     <div class="service-box">
         <h3>Job Placement</h3>
@@ -127,55 +137,121 @@ const WHATSAPP_NUMBER = "919204926920";
 
     <div class="service-box">
         <h3>Resume Help</h3>
-        <p>Professional CV creation</p>
+        <p>Professional CV support</p>
     </div>
 
     <div class="service-box">
-        <h3>Interview Support</h3>
-        <p>Prepare for interviews easily</p>
+        <h3>Interview Guide</h3>
+        <p>Prepare easily</p>
     </div>
 </section>
 
-<!-- STEP 3: FORM (IMPROVED) -->
+<!-- APPLY FORM -->
 <section class="form-section">
     <h2>Apply for Job</h2>
 
-    <form onsubmit="sendForm(event)">
+    <form onsubmit="submitForm(event)">
         <input type="text" id="name" placeholder="Your Name" required>
         <input type="tel" id="phone" placeholder="Mobile Number" required>
-        <textarea id="skills" rows="4" placeholder="Your Skills"></textarea>
+        <textarea id="skills" placeholder="Your Skills"></textarea>
         <button type="submit">Submit</button>
     </form>
 </section>
 
-<!-- STEP 2: WhatsApp Floating Button -->
-<a class="whatsapp" id="waBtn" target="_blank">
+<!-- ADD JOB (ADMIN ONLY) -->
+<section class="form-section" id="adminForm" style="display:none;">
+    <h3>Add New Job</h3>
+    <input type="text" id="jobTitle" placeholder="Job Title">
+    <textarea id="jobDesc" placeholder="Job Description"></textarea>
+    <button onclick="addJob()">Add Job</button>
+</section>
+
+<!-- JOB LIST -->
+<section class="job-list" id="jobList"></section>
+
+<!-- WHATSAPP BUTTON -->
+<a class="whatsapp" href="https://wa.me/919204926920" target="_blank">
 💬 WhatsApp Apply
 </a>
 
-<footer>
-    <p>© 2026 Jharkhand Job Solution</p>
+<footer style="text-align:center;padding:10px;background:#222;color:white;">
+    © 2026 Jharkhand Job Solution
 </footer>
 
 <script>
-// WhatsApp link auto generate
-document.getElementById("waBtn").href =
-"https://wa.me/" + WHATSAPP_NUMBER;
 
-// Form submit handler
-function sendForm(e){
-    e.preventDefault();
+let isAdmin = false;
+let jobs = JSON.parse(localStorage.getItem("jobs")) || [];
 
-    let name = document.getElementById("name").value;
-    let phone = document.getElementById("phone").value;
+// SHOW JOBS
+function renderJobs(){
+    let html = "";
+    jobs.forEach((job, index)=>{
+        html += `
+        <div class="job">
+            <h3>${job.title}</h3>
+            <p>${job.desc}</p>
+            ${isAdmin ? `<button onclick="deleteJob(${index})">Delete</button>` : ""}
+        </div>`;
+    });
+    document.getElementById("jobList").innerHTML = html;
+}
+renderJobs();
 
-    if(name=="" || phone==""){
-        alert("Please fill all required fields");
+// ADD JOB
+function addJob(){
+    let title = document.getElementById("jobTitle").value;
+    let desc = document.getElementById("jobDesc").value;
+
+    if(title==""){
+        alert("Job title required");
         return;
     }
 
-    alert("Form submitted successfully! We will contact you soon.");
+    jobs.push({title, desc});
+    localStorage.setItem("jobs", JSON.stringify(jobs));
+
+    document.getElementById("jobTitle").value="";
+    document.getElementById("jobDesc").value="";
+
+    renderJobs();
 }
+
+// DELETE JOB
+function deleteJob(i){
+    jobs.splice(i,1);
+    localStorage.setItem("jobs", JSON.stringify(jobs));
+    renderJobs();
+}
+
+// FORM SUBMIT
+function submitForm(e){
+    e.preventDefault();
+    alert("Application Submitted Successfully!");
+}
+
+// ADMIN LOGIN
+function loginAdmin(){
+    let pass = document.getElementById("pass").value;
+
+    if(pass=="admin123"){
+        isAdmin = true;
+        document.getElementById("adminForm").style.display="block";
+        alert("Admin Login Success");
+        renderJobs();
+    }else{
+        alert("Wrong Password");
+    }
+}
+
+// LOGOUT
+function logoutAdmin(){
+    isAdmin = false;
+    document.getElementById("adminForm").style.display="none";
+    alert("Logged Out");
+    renderJobs();
+}
+
 </script>
 
 </body>
