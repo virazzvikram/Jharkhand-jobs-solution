@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="hi">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JH Job Solution</title>
+<title>Jharkhand Job Solution</title>
 
 <style>
 body{
@@ -13,26 +12,24 @@ body{
     background:#f4f4f4;
 }
 
-/* PART 1 - HEADER */
+/* HEADER */
 header{
     background:#007bff;
     color:white;
     padding:15px;
     text-align:center;
+    position:sticky;
+    top:0;
 }
 
-/* PART 1B - HERO SECTION */
+/* HERO */
 .hero{
     padding:40px;
     text-align:center;
     background:white;
 }
 
-.hero h1{
-    color:#333;
-}
-
-/* PART 2 - SERVICES */
+/* SERVICES */
 .services{
     display:flex;
     flex-wrap:wrap;
@@ -47,9 +44,10 @@ header{
     width:250px;
     box-shadow:0 0 10px rgba(0,0,0,0.1);
     text-align:center;
+    border-radius:10px;
 }
 
-/* PART 3 - FORM */
+/* FORM */
 .form-section{
     background:#fff;
     padding:30px;
@@ -60,6 +58,34 @@ input, textarea{
     width:90%;
     padding:10px;
     margin:10px 0;
+    border:1px solid #ccc;
+    border-radius:5px;
+}
+
+button{
+    padding:10px 20px;
+    background:#007bff;
+    color:white;
+    border:none;
+    cursor:pointer;
+    border-radius:5px;
+}
+
+button:hover{
+    background:#0056b3;
+}
+
+/* WHATSAPP BUTTON */
+.whatsapp{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    background:#25D366;
+    color:white;
+    padding:12px 15px;
+    border-radius:50px;
+    text-decoration:none;
+    font-weight:bold;
 }
 
 /* FOOTER */
@@ -68,24 +94,27 @@ footer{
     color:white;
     text-align:center;
     padding:10px;
+    margin-top:20px;
 }
 </style>
 </head>
 
 <body>
 
-<!-- PART 1 -->
+<!-- WhatsApp Number (ONE TIME SET) -->
+<script>
+const WHATSAPP_NUMBER = "919204926920";
+</script>
+
 <header>
     <h2>Jharkhand Job Solution</h2>
 </header>
 
-<!-- PART 1B -->
 <section class="hero">
     <h1>Find Your Dream Job Easily</h1>
-    <p>We help you get the best local jobs in your area</p>
+    <p>We help you get local jobs fast</p>
 </section>
 
-<!-- PART 2 -->
 <section class="services">
     <div class="service-box">
         <h3>Job Placement</h3>
@@ -103,22 +132,37 @@ footer{
     </div>
 </section>
 
-<!-- PART 3 -->
 <section class="form-section">
     <h2>Apply for Job</h2>
 
-    <form>
-        <input type="text" placeholder="Your Name" required>
-        <input type="tel" placeholder="Mobile Number" required>
-        <textarea rows="4" placeholder="Your Skills"></textarea>
+    <form onsubmit="sendForm(event)">
+        <input type="text" id="name" placeholder="Your Name" required>
+        <input type="tel" id="phone" placeholder="Mobile Number" required>
+        <textarea id="skills" rows="4" placeholder="Your Skills"></textarea>
         <button type="submit">Submit</button>
     </form>
 </section>
 
-<!-- FOOTER -->
+<!-- WhatsApp Button -->
+<a class="whatsapp" id="waBtn" target="_blank">
+💬 WhatsApp Apply
+</a>
+
 <footer>
     <p>© 2026 Jharkhand Job Solution</p>
 </footer>
+
+<script>
+// WhatsApp auto link
+document.getElementById("waBtn").href =
+"https://wa.me/" + WHATSAPP_NUMBER;
+
+// form submit
+function sendForm(e){
+    e.preventDefault();
+    alert("Form submitted successfully! We will contact you soon.");
+}
+</script>
 
 </body>
 </html>
