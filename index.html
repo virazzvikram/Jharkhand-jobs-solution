@@ -1,68 +1,124 @@
-<section style="padding:30px;">
-<h2 style="text-align:center;">🔥 Latest Job Openings</h2>
 
-<div style="border:1px solid #ddd;padding:15px;margin:10px;border-radius:10px;">
-<h3>🏢 Office Assistant</h3>
-<p>📍 Location: Hazaribagh</p>
-<p>💰 Salary: ₹12,000 - ₹18,000</p>
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JH Job Solution</title>
 
-<br>
-<a href="#apply-form" style="display:inline-block;background:#007bff;color:white;padding:10px 20px;text-decoration:none;border-radius:6px;">
-Apply Now
-</a>
-<div style="border:1px solid #ddd;padding:15px;margin:10px;border-radius:10px;">
-<h3>💻 Computer Operator</h3>
-<p>📍 Location: Hazaribagh</p>
-<p>💰 Salary: ₹10,000 - ₹16,000</p>
-</div>
+<style>
+body{
+    margin:0;
+    font-family:Arial;
+    background:#f4f4f4;
+}
 
-<div style="border:1px solid #ddd;padding:15px;margin:10px;border-radius:10px;">
-<h3>👩 Receptionist</h3>
-<p>📍 Location: Hazaribagh</p>
-<p>💰 Salary: ₹11,000 - ₹17,000</p>
-</div>
+/* PART 1 - HEADER */
+header{
+    background:#007bff;
+    color:white;
+    padding:15px;
+    text-align:center;
+}
 
-<div style="border:1px solid #ddd;padding:15px;margin:10px;border-radius:10px;">
-<h3>📊 Accountant</h3>
-<p>📍 Location: Hazaribagh</p>
-<p>💰 Salary: ₹15,000 - ₹25,000</p>
-</div>
+/* PART 1B - HERO SECTION */
+.hero{
+    padding:40px;
+    text-align:center;
+    background:white;
+}
 
-<div style="border:1px solid #ddd;padding:15px;margin:10px;border-radius:10px;">
-<h3>🛵 Delivery Executive</h3>
-<p>📍 Location: Hazaribagh</p>
-<p>💰 Salary: ₹12,000 - ₹20,000</p>
-</div>
+.hero h1{
+    color:#333;
+}
 
-<div style="border:1px solid #ddd;padding:15px;margin:10px;border-radius:10px;">
-<h3>🛡️ Security Guard</h3>
-<p>📍 Location: Hazaribagh</p>
-<p>💰 Salary: ₹10,000 - ₹15,000</p>
-</div>
+/* PART 2 - SERVICES */
+.services{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    padding:20px;
+}
 
-<div style="border:1px solid #ddd;padding:15px;margin:10px;border-radius:10px;">
-<h3>🚗 Driver</h3>
-<p>📍 Location: Hazaribagh</p>
-<p>💰 Salary: ₹13,000 - ₹20,000</p>
-</div>
+.service-box{
+    background:white;
+    margin:10px;
+    padding:20px;
+    width:250px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+    text-align:center;
+}
 
-<div style="border:1px solid #ddd;padding:15px;margin:10px;border-radius:10px;">
-<h3>🏨 Hotel Staff</h3>
-<p>📍 Location: Hazaribagh</p>
-<p>💰 Salary: ₹10,000 - ₹16,000</p>
-</div>
+/* PART 3 - FORM */
+.form-section{
+    background:#fff;
+    padding:30px;
+    text-align:center;
+}
 
-<div style="border:1px solid #ddd;padding:15px;margin:10px;border-radius:10px;">
-<h3>🛒 Sales Executive</h3>
-<p>📍 Location: Hazaribagh</p>
-<p>💰 Salary: ₹12,000 - ₹22,000</p>
-</div>
+input, textarea{
+    width:90%;
+    padding:10px;
+    margin:10px 0;
+}
 
-<div style="border:1px solid #ddd;padding:15px;margin:10px;border-radius:10px;">
-<h3>🔧 Helper</h3>
-<p>📍 Location: Hazaribagh</p>
-<p>💰 Salary: ₹9,000 - ₹14,000</p>
-</div>
+/* FOOTER */
+footer{
+    background:#222;
+    color:white;
+    text-align:center;
+    padding:10px;
+}
+</style>
+</head>
 
+<body>
+
+<!-- PART 1 -->
+<header>
+    <h2>Jharkhand Job Solution</h2>
+</header>
+
+<!-- PART 1B -->
+<section class="hero">
+    <h1>Find Your Dream Job Easily</h1>
+    <p>We help you get the best local jobs in your area</p>
 </section>
-<section id="apply-form" class="services">
+
+<!-- PART 2 -->
+<section class="services">
+    <div class="service-box">
+        <h3>Job Placement</h3>
+        <p>We connect you with companies</p>
+    </div>
+
+    <div class="service-box">
+        <h3>Resume Help</h3>
+        <p>Professional CV creation</p>
+    </div>
+
+    <div class="service-box">
+        <h3>Interview Support</h3>
+        <p>Prepare for interviews easily</p>
+    </div>
+</section>
+
+<!-- PART 3 -->
+<section class="form-section">
+    <h2>Apply for Job</h2>
+
+    <form>
+        <input type="text" placeholder="Your Name" required>
+        <input type="tel" placeholder="Mobile Number" required>
+        <textarea rows="4" placeholder="Your Skills"></textarea>
+        <button type="submit">Submit</button>
+    </form>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <p>© 2026 Jharkhand Job Solution</p>
+</footer>
+
+</body>
+</html>
