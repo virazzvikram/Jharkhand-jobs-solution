@@ -1,23 +1,40 @@
+
 <section class="services">
-<h2>Apply for Job</h2>
+  <h2>Apply for Job</h2>
 
-<form id="jobForm" style="max-width:500px;margin:auto;text-align:left;">
+  <form action="https://formsubmit.co/Dasvikram1014@gmail.com" method="POST" style="max-width:500px;margin:auto;text-align:left;">
 
-<label>Full Name</label><br>
-<input id="name" type="text" style="width:100%;padding:10px;margin:8px 0;">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_subject" value="New Job Application - Jharkhand Job Solution">
 
-<label>Mobile Number</label><br>
-<input type="tel" style="width:100%;padding:10px;margin:8px 0;"><br>
+    <label>Full Name</label><br>
+    <input type="text" name="Full Name" required style="width:100%;padding:10px;margin:8px 0;"><br>
 
-<label>Qualification</label><br>
-<input type="text" style="width:100%;padding:10px;margin:8px 0;"><br>
+    <label>Mobile Number</label><br>
+    <input type="tel" name="Mobile Number" required style="width:100%;padding:10px;margin:8px 0;"><br>
 
-<label>District</label><br>
-<input type="text" style="width:100%;padding:10px;margin:8px 0;"><br>
+    <label>Qualification</label><br>
+    <input type="text" name="Qualification" required style="width:100%;padding:10px;margin:8px 0;"><br>
 
-<button style="background:#198754;color:#fff;padding:12px 25px;border:none;border-radius:8px;font-size:16px;">
-Apply Now
-</button>
+    <label>District</label><br>
+    <input type="text" name="District" required style="width:100%;padding:10px;margin:8px 0;"><br>
 
-</form>
+    <label>Job Category</label><br>
+    <select name="Job Category" style="width:100%;padding:10px;margin:8px 0;">
+      <option>Office Job</option>
+      <option>Receptionist</option>
+      <option>Accountant</option>
+      <option>Sales</option>
+      <option>Delivery</option>
+      <option>Security Guard</option>
+      <option>Driver</option>
+      <option>Hotel Staff</option>
+      <option>Other</option>
+    </select><br>
+
+    <button type="submit" style="background:#198754;color:#fff;padding:12px 25px;border:none;border-radius:8px;font-size:16px;">
+      Apply Now
+    </button>
+
+  </form>
 </section>
