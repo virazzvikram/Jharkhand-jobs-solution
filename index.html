@@ -29,6 +29,10 @@ header{
     background:white;
 }
 
+.hero h1{
+    color:#333;
+}
+
 /* SERVICES */
 .services{
     display:flex;
@@ -101,7 +105,7 @@ footer{
 
 <body>
 
-<!-- WhatsApp Number (ONE TIME SET) -->
+<!-- STEP 2 + STEP 3: WhatsApp Number (ONE TIME SET) -->
 <script>
 const WHATSAPP_NUMBER = "919204926920";
 </script>
@@ -132,6 +136,7 @@ const WHATSAPP_NUMBER = "919204926920";
     </div>
 </section>
 
+<!-- STEP 3: FORM (IMPROVED) -->
 <section class="form-section">
     <h2>Apply for Job</h2>
 
@@ -143,7 +148,7 @@ const WHATSAPP_NUMBER = "919204926920";
     </form>
 </section>
 
-<!-- WhatsApp Button -->
+<!-- STEP 2: WhatsApp Floating Button -->
 <a class="whatsapp" id="waBtn" target="_blank">
 💬 WhatsApp Apply
 </a>
@@ -153,13 +158,22 @@ const WHATSAPP_NUMBER = "919204926920";
 </footer>
 
 <script>
-// WhatsApp auto link
+// WhatsApp link auto generate
 document.getElementById("waBtn").href =
 "https://wa.me/" + WHATSAPP_NUMBER;
 
-// form submit
+// Form submit handler
 function sendForm(e){
     e.preventDefault();
+
+    let name = document.getElementById("name").value;
+    let phone = document.getElementById("phone").value;
+
+    if(name=="" || phone==""){
+        alert("Please fill all required fields");
+        return;
+    }
+
     alert("Form submitted successfully! We will contact you soon.");
 }
 </script>
