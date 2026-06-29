@@ -23,3 +23,55 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 console.log("Firebase Connected");
+// ===== LOAD JOBS =====
+async function loadJobs() {
+  const jobList = document.getElementById("jobList");
+  jobList.innerHTML = "";
+
+  const querySnapshot = await getDocs(collection(db, "jobs"));
+
+  querySnapshot.forEach((docSnap) => {
+    const job = docSnap.data();
+
+    jobList.innerHTML += `
+      <div class="job">
+        <h3>${job.title}</h3>
+        <p>${job.desc}</p>
+        ${
+          isAdmin
+            ? `<button onclick="deleteJob('${docSnap.id}')">Delete</button>`
+            : ""
+        }
+      </div>
+    `;
+  });
+}
+
+// ===== ADD JOB =====
+window.addJob = async function () {
+  const title = document.getElementById("jobTitle").value;
+  const desc = document.getElementById("jobDesc").value;
+
+  if (!title) {
+    alert("Job Title Required");
+    return;
+  }
+
+  await addDoc(collection(db, "jobs"), {
+    title: title,
+    desc: desc
+  });
+
+  document.getElementById("jobTitle").value = "";
+  document.getElementById("jobDesc").value = "";
+
+  loadJobs();
+};
+
+// ===== DELETE JOB =====
+window.deleteJob = async function (id) {
+  await deleteDoc(doc(db, "jobs", id));
+  loadJobs();
+};
+
+loadJobs();
