@@ -198,8 +198,10 @@ function renderJobs(){
 }
 renderJobs();
 
-// ADD JOB
-function addJob(){
+// <h3>Add New Job</h3>
+<input type="text" id="jobTitle">
+<textarea id="jobDesc"></textarea>
+<button onclick="addJob()">Add Job</button>
     let title = document.getElementById("jobTitle").value;
     let desc = document.getElementById("jobDesc").value;
 
@@ -217,17 +219,35 @@ function addJob(){
     renderJobs();
 }
 
-// DELETE JOB
-function deleteJob(i){
-    jobs.splice(i,1);
-    localStorage.setItem("jobs", JSON.stringify(jobs));
+// async function deleteJob(id){
+
+    await deleteDoc(doc(db,"jobs",id));
+
     renderJobs();
+
+}
 }
 
-// FORM SUBMIT
-function submitForm(e){
+// 
+}async function submitForm(e){
+
     e.preventDefault();
+
+    let name=document.getElementById("name").value;
+    let phone=document.getElementById("phone").value;
+    let skills=document.getElementById("skills").value;
+
+    await addDoc(collection(db,"applications"),{
+        name:name,
+        phone:phone,
+        skills:skills,
+        createdAt:new Date()
+    });
+
     alert("Application Submitted Successfully!");
+
+    e.target.reset();
+
 }
 
 // ADMIN LOGIN
