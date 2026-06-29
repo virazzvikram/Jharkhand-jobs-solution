@@ -75,3 +75,25 @@ window.deleteJob = async function (id) {
 };
 
 loadJobs();
+// ===== ADMIN LOGIN =====
+let isAdmin = false;
+
+window.loginAdmin = function () {
+    const pass = document.getElementById("pass").value;
+
+    if (pass === "admin123") {
+        isAdmin = true;
+        document.getElementById("adminForm").style.display = "block";
+        alert("Admin Login Success");
+        loadJobs();
+    } else {
+        alert("Wrong Password");
+    }
+};
+
+// ===== LOGOUT =====
+window.logoutAdmin = function () {
+    isAdmin = false;
+    document.getElementById("adminForm").style.display = "none";
+    loadJobs();
+};
