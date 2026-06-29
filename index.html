@@ -8,8 +8,9 @@
 <style>
 body{
     <header class="top-header">
-  <div class="logo">💼 Jharkhand Job Solution</div>
-
+  <div class="logo">
+    💼 <span>Jharkhand Job Solution</span>
+</div>
   <nav>
     <a href="#">Home</a>
     <a href="#jobs">Jobs</a>
@@ -19,8 +20,12 @@ body{
 </header>
 
 <section class="hero">
-  <h1>Find Your Dream Job in Jharkhand</h1>
-  <p>Daily Job Updates • Trusted Employers • Easy Apply</p>
+    <div class="hero-content">
+        <h1>Find Your Dream Job in Jharkhand</h1>
+        <p>Daily Job Updates • Private Jobs • Easy Apply</p>
+
+        <a href="#apply" class="btn">Apply Now</a>
+    </div>
 </section>
     margin:0;
     font-family:Arial;
@@ -121,43 +126,6 @@ button{
     border-radius:10px;
     box-shadow:0 0 10px rgba(0,0,0,0.1);
 }
-</style.top-header{
-    background:#0d6efd;
-    color:white;
-    padding:15px 20px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    flex-wrap:wrap;
-}
-
-.logo{
-    font-size:24px;
-    font-weight:bold;
-}
-
-.top-header nav a{
-    color:white;
-    text-decoration:none;
-    margin:0 10px;
-    font-weight:bold;
-}
-
-.hero{
-    background:linear-gradient(135deg,#0d6efd,#00b894);
-    color:white;
-    text-align:center;
-    padding:60px 20px;
-}
-
-.hero h1{
-    font-size:32px;
-    margin-bottom:10px;
-}
-
-.hero p{
-    font-size:18px;
-}>
 </head>
 
 <body>
@@ -170,10 +138,15 @@ button{
     <button onclick="logoutAdmin()">Logout</button>
 </div>
 
-<header>
-    <h2>Jharkhand Job Solution</h2>
-</header>
+<header class="top-header">
+    <div class="logo">🟢 Jharkhand Job Solution</div>
 
+    <nav>
+        <a href="#">Home</a>
+        <a href="#jobList">Jobs</a>
+        <a href="#adminForm">Admin</a>
+    </nav>
+</header>
 <section class="hero">
     <h1>Find Your Dream Job Easily</h1>
     <p>Local jobs, fast apply system</p>
@@ -228,9 +201,6 @@ button{
 <footer style="text-align:center;padding:10px;background:#222;color:white;">
     © 2026 Jharkhand Job Solution
 </footer>
-
-
-</script>
-
-<script type="module" src="app.js"></script></body>
+<script type="module" src="app.js"></script>
+</body>
 </html>
