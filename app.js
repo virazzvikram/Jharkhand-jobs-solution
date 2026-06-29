@@ -1,4 +1,3 @@
-// Firebase SDK
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import {
   getFirestore,
@@ -10,90 +9,107 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBBinpc369ITfoZ-3Q8-zIczHXnr5SVWvY",
+  apiKey: "YOUR_API_KEY",
   authDomain: "jharkhand-jobs-solution-47382.firebaseapp.com",
   projectId: "jharkhand-jobs-solution-47382",
-  storageBucket: "jharkhand-jobs-solution-47382.firebasestorage.app",
+  storageBucket: "jharkhand-jobs-solution-47382.appspot.com",
   messagingSenderId: "155478614596",
-  appId: "1:155478614596:web:274c4bd34320c858dd1211",
-  measurementId: "G-7N6MQGBNDP"
+  appId: "YOUR_APP_ID"
 };
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-console.log("Firebase Connected");
-// ===== LOAD JOBS =====
-async function loadJobs() {
-  const jobList = document.getElementById("jobList");
-  jobList.innerHTML = "";
+let isAdmin = false;
 
-  const querySnapshot = await getDocs(collection(db, "jobs"));
+async function renderJobs() {
+  const list = document.getElementById("jobList");
+  if (!list) return;
 
-  querySnapshot.forEach((docSnap) => {
-    const job = docSnap.data();
+  list.innerHTML = "";
 
-    jobList.innerHTML += `
+  const snap = await getDocs(collection(db, "jobs"));
+
+  snap.forEach((d) => {
+    const job = d.data();
+
+    list.innerHTML += `
       <div class="job">
         <h3>${job.title}</h3>
         <p>${job.desc}</p>
         ${
           isAdmin
-            ? `<button onclick="deleteJob('${docSnap.id}')">Delete</button>`
+            ? `<button onclick="deleteJob('${d.id}')">Delete</button>`
             : ""
         }
       </div>
     `;
   });
-}
-
-// ===== ADD JOB =====
+}// ADD JOB
 window.addJob = async function () {
   const title = document.getElementById("jobTitle").value;
   const desc = document.getElementById("jobDesc").value;
 
   if (!title) {
-    alert("Job Title Required");
+    alert("Job title required");
     return;
   }
 
   await addDoc(collection(db, "jobs"), {
-    title: title,
-    desc: desc
+    title,
+    desc
   });
 
   document.getElementById("jobTitle").value = "";
   document.getElementById("jobDesc").value = "";
 
-  loadJobs();
+  renderJobs();
 };
 
-// ===== DELETE JOB =====
+// DELETE JOB
 window.deleteJob = async function (id) {
   await deleteDoc(doc(db, "jobs", id));
-  loadJobs();
+  renderJobs();
 };
 
-loadJobs();
-// ===== ADMIN LOGIN =====
-let isAdmin = false;
+// APPLY FORM
+const form = document.getElementById("applyForm");
 
+if (form) {
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    await addDoc(collection(db, "applications"), {
+      name: document.getElementById("name").value,
+      phone: document.getElementById("phone").value,
+      skills: document.getElementById("skills").value,
+      createdAt: new Date()
+    });
+
+    alert("Application Submitted Successfully!");
+    form.reset();
+  });
+}
+
+// ADMIN LOGIN
 window.loginAdmin = function () {
-    const pass = document.getElementById("pass").value;
+  const pass = document.getElementById("pass").value;
 
-    if (pass === "admin123") {
-        isAdmin = true;
-        document.getElementById("adminForm").style.display = "block";
-        alert("Admin Login Success");
-        loadJobs();
-    } else {
-        alert("Wrong Password");
-    }
+  if (pass === "admin123") {
+    isAdmin = true;
+    document.getElementById("adminForm").style.display = "block";
+    alert("Admin Login Success");
+    renderJobs();
+  } else {
+    alert("Wrong Password");
+  }
 };
 
-// ===== LOGOUT =====
+// LOGOUT
 window.logoutAdmin = function () {
-    isAdmin = false;
-    document.getElementById("adminForm").style.display = "none";
-    loadJobs();
+  isAdmin = false;
+  document.getElementById("adminForm").style.display = "none";
+  renderJobs();
 };
+
+renderJobs();
