@@ -36,9 +36,15 @@ async function renderJobs() {
     list.innerHTML += `
       <div class="job">
         <h3>${job.title}</h3>
-        <p>${job.desc}</p>
         <h3>${job.title}</h3>
 <p>${job.desc}</p>
+
+<p><b>Salary:</b> ${job.salary}</p>
+<p><b>Location:</b> ${job.location}</p>
+
+<button onclick="document.getElementById('applyForm').scrollIntoView({behavior:'smooth'})">
+Apply
+</button>
         <button onclick="document.getElementById('applyForm').scrollIntoView({behavior:'smooth'})">Apply</button>
         ${
           isAdmin
