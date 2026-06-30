@@ -37,6 +37,8 @@ async function renderJobs() {
       <div class="job">
         <h3>${job.title}</h3>
         <p>${job.desc}</p>
+        
+        <button onclick="document.getElementById('applyForm').scrollIntoView({behavior:'smooth'})">Apply</button>
         ${
           isAdmin
             ? `<button onclick="deleteJob('${d.id}')">Delete</button>`
