@@ -56,6 +56,28 @@ Apply
       </div>
     `;
   });
+  async function loadApplications() {
+    if (!isAdmin) return;
+
+    const list = document.getElementById("applications");
+    document.getElementById("applicantList").style.display = "block";
+
+    list.innerHTML = "";
+
+    const snap = await getDocs(collection(db, "applications"));
+
+    snap.forEach((doc) => {
+        const data = doc.data();
+
+        list.innerHTML += `
+            <div class="job">
+                <h3>${data.name}</h3>
+                <p>📞 ${data.phone}</p>
+                <p>💼 ${data.skills}</p>
+            </div>
+        `;
+    });
+}
 }// ADD JOB
 window.addJob = async function () {
   const title = document.getElementById("jobTitle").value;
@@ -111,6 +133,9 @@ window.loginAdmin = function () {
     document.getElementById("adminForm").style.display = "block";
     alert("Admin Login Success");
     renderJobs();
+    loadApplications();
+    document.getElementById("applicantList").style.display = "block";
+loadApplications();
   } else {
     alert("Wrong Password");
   }
@@ -121,6 +146,7 @@ window.logoutAdmin = function () {
   isAdmin = false;
   document.getElementById("adminForm").style.display = "none";
   renderJobs();
+  document.getElementById("applicantList").style.display = "none";
 };
 
 renderJobs();
