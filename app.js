@@ -6,6 +6,8 @@ import {
   getDocs,
   deleteDoc,
   doc
+  query
+  orderBy
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
